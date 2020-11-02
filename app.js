@@ -34,6 +34,58 @@ io.on("connection", (socket) => {
     if (doctor){
       // update patient (current requester)
       const patient = usersDB.getUserByPublicId(patientId)
+      // patient.doctorsList.push(doctor)
+      // patient.doctorCurrent = doctor
+      // patient.doctorCurrent.dateConnection = new Date()
+      //
+      // usersDB.updateUser(patient.id, patient)
+      //
+      // // update doctor
+      // doctor.patientsList.push(patient)
+      // doctor.patientCurrent = patient
+      // doctor.patientCurrent.dateConnection = new Date()
+      //
+      // // patient join roomId
+      // // socket.join(roomId);
+      // // 2. send a specific message
+      // delete patient.doctorsList
+      // delete patient.doctorCurrent
+      io.to(doctor.id).emit("connectPractitioner", patient);
+    }
+  });
+  
+  socket.on("validatePractitioner", ({practitionerId, patientId}) => {
+    //1. get the socketIo id of the doctor
+    const doctor = usersDB.getUserByPublicId(practitionerId)
+    if (doctor){
+      // update patient (current requester)
+      const patient = usersDB.getUserByPublicId(patientId)
+      // patient.doctorsList.push(doctor)
+      // patient.doctorCurrent = doctor
+      // patient.doctorCurrent.dateConnection = new Date()
+      //
+      // usersDB.updateUser(patient.id, patient)
+      //
+      // // update doctor
+      // doctor.patientsList.push(patient)
+      // doctor.patientCurrent = patient
+      // doctor.patientCurrent.dateConnection = new Date()
+      //
+      // // patient join roomId
+      // // socket.join(roomId);
+      // // 2. send a specific message
+      // delete patient.doctorsList
+      // delete patient.doctorCurrent
+      io.to(doctor.id).emit("validatePractitioner", patient);
+    }
+  });
+  
+  socket.on("handShakePartners", ({practitionerId, patientId}) => {
+    //1. get the socketIo id of the doctor
+    const doctor = usersDB.getUserByPublicId(practitionerId)
+    if (doctor){
+      // update patient (current requester)
+      const patient = usersDB.getUserByPublicId(patientId)
       patient.doctorsList.push(doctor)
       patient.doctorCurrent = doctor
       patient.doctorCurrent.dateConnection = new Date()
@@ -50,7 +102,7 @@ io.on("connection", (socket) => {
       // 2. send a specific message
       delete patient.doctorsList
       delete patient.doctorCurrent
-      io.to(doctor.id).emit("connectPractitioner", patient);
+      io.to(patient.id).emit("handShakePartners");
     }
   });
   
