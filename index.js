@@ -1,6 +1,7 @@
-if (process.env.NODE_ENV != "production") {
+if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
+
 const { app, server } = require("./app");
 
 const port = process.env.PORT;
