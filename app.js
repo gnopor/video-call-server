@@ -76,8 +76,10 @@ io.on("connection", (socket) => {
       // // 2. send a specific message
       // delete patient.doctorsList
       // delete patient.doctorCurrent
+
       io.to(doctor.id).emit("validatePractitioner", patient);
     }
+    io.emit("validatePractitioner", "to be define");
   });
 
   socket.on("handShakePartners", ({ practitionerId, patientId }) => {
