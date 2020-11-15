@@ -79,7 +79,7 @@ io.on("connection", (socket) => {
 
       io.to(doctor.id).emit("validatePractitioner", patient);
     }
-    io.emit("validatePractitioner", "to be define");
+    io.emit("validatePractitioner", "to be defined");
   });
 
   socket.on("handShakePartners", ({ practitionerId, patientId }) => {
