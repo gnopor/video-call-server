@@ -79,7 +79,7 @@ io.on("connection", (socket) => {
 
       io.to(doctor.id).emit("validatePractitioner", patient);
     }
-    io.emit("validatePractitioner", "to be defined");
+    // io.emit("validatePractitioner", "to be defined");
   });
 
   socket.on("handShakePartners", ({ practitionerId, patientId }) => {
@@ -106,6 +106,16 @@ io.on("connection", (socket) => {
       delete patient.doctorCurrent;
       io.to(patient.id).emit("handShakePartners");
     }
+  });
+
+  // handle practitionner request
+  socket.on("requestPatientConnection", ({ patientId, practitionerId }) => {
+    io.emit("requestPatientConnection", { doctor: "to be defined" });
+  });
+
+  // confirm practionner request
+  socket.on("confirmPractionner", ({ patientId, practitionerId }) => {
+    io.emit("confirmPractionner", { patientId });
   });
 
   // // handle new entry
