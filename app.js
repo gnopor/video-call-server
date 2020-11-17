@@ -110,11 +110,13 @@ io.on("connection", (socket) => {
 
   // handle practitionner request
   socket.on("requestPatientConnection", ({ patientId, practitionerId }) => {
+    console.log("handle practitioner request");
     io.emit("requestPatientConnection", { doctor: "to be defined" });
   });
 
   // confirm practionner request
   socket.on("confirmPractionner", ({ patientId, practitionerId }) => {
+    console.log("confirm practitioner request");
     io.emit("confirmPractionner", { patientId });
   });
 
